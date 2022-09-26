@@ -29,9 +29,15 @@ if (process.argv.indexOf('-h') > -1) {
 if (process.argv.indexOf('-n') > -1) {
 	latitude = argv[process.argv.indexOf('-n') - 1]
 }
+if (process.argv.indexOf('-s') > -1) {
+	latitude = argv[process.argv.indexOf('-s') -1] * -1;
+}
 // Longitude command
 if (process.argv.indexOf('-w') > -1) {
 	longitude = argv[process.argv.indexOf('-w') - 1];
+}
+if (process.argv.indexOf('-e') > -1) {
+	longitude = argv[process.argv.indexOf('-e') -1] * 1;
 }
 // Fetch URL
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude='+latitude+'&longitude='+longitude+'&daily=precipitation_hours&timezone='+timezone);
@@ -41,6 +47,7 @@ const data = await response.json();
 
 if (process.argv.indexOf('-j') > -1) {
 	console.log(data);
+	process.exit(0);
 }
 
 // Get days and parse precipitation info
@@ -75,3 +82,5 @@ if (days == 0) {
 	  console.log("tomorrow.")
 	  process.exit(0)
 }
+// Error if day branch does not work.
+process.exit(1);
