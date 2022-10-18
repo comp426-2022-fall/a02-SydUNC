@@ -16,7 +16,7 @@ var longitude = 0;
 
 // Help command
 if (process.argv.indexOf('-h') > -1) {
-	  console.log("Usage: $0 [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE")
+	  console.log("Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE")
 	  console.log("  -h\t\tShow this help message and exit.")
 	  console.log("  -n, -s\tLatitude: N positive; S negative.")
 	  console.log("  -e, -w\tLongitude: E positive; W negative.")
