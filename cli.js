@@ -6,7 +6,6 @@ var argv = process.argv.slice(2);
 
 // Time zone guess
 var timezone = moment.tz.guess();
-console.log(timezone);
 // Time zone if user input
 if (process.argv.indexOf('-z') > -1) {
 	timezone = argv[process.argv.indexOf('-z') - 1];
