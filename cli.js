@@ -10,8 +10,8 @@ var timezone = moment.tz.guess();
 if (process.argv.indexOf('-z') > -1) {
 	timezone = argv[process.argv.indexOf('-z') - 1];
 }
-var latitude = 0;
-var longitude = 0;
+var latitude = -180.1;
+var longitude = -180.1;
 
 // Help command
 if (process.argv.indexOf('-h') > -1) {
@@ -27,16 +27,28 @@ if (process.argv.indexOf('-h') > -1) {
 // Latitude command
 if (process.argv.indexOf('-n') > -1) {
 	latitude = argv[process.argv.indexOf('-n') - 1]
+	if (latitude > 90 || latitude < -90) {
+		process.exit(1);
+	}
 }
 if (process.argv.indexOf('-s') > -1) {
 	latitude = argv[process.argv.indexOf('-s') -1] * -1;
+	if (latitude > 90 || latitude < -90) {
+		process.exit(1);
+	}
 }
 // Longitude command
 if (process.argv.indexOf('-w') > -1) {
 	longitude = argv[process.argv.indexOf('-w') - 1];
+	if (longitude > 180 || longitude < -180) {
+		process.exit(1);
+	}
 }
 if (process.argv.indexOf('-e') > -1) {
 	longitude = argv[process.argv.indexOf('-e') -1] * 1;
+	if (longitude > 180 || longitude < -180) {
+		process.exit(1);
+	}
 }
 // Fetch URL
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude='+latitude+'&longitude='+longitude+'&daily=precipitation_hours&current_weather=true&timezone='+timezone);
